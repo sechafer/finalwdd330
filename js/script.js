@@ -28,33 +28,77 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadStockData() {
         const url = 'https://real-time-finance-data.p.rapidapi.com/stock-time-series-source-2?symbol=AAPL&period=1D';
         const options = {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-key': '09db4c897bmshb4182a425da0a1ap181b81jsnd2a13f91e193',
-                'x-rapidapi-host': 'real-time-finance-data.p.rapidapi.com'
-            }
+          method: 'GET',
+          headers: {
+            'x-rapidapi-key': '09db4c897bmshb4182a425da0a1ap181b81jsnd2a13f91e193',
+            'x-rapidapi-host': 'real-time-finance-data.p.rapidapi.com'
+          }
         };
-
+    
         try {
-            const response = await fetch(url, options);
-            const result = await response.json();  // Change to .json() to parse JSON data
-            updateStockData(result);
+          const response = await fetch(url, options);
+          const result = await response.json();
+          updateStockData(result.data);
+          updateStockChart(result.data);
         } catch (error) {
-            console.error('Error fetching stock data:', error);
+          console.error('Error fetching stock data:', error);
         }
-    }
+      }
 
     function updateStockData(data) {
         const stockDataDiv = document.getElementById('stock-data');
         stockDataDiv.innerHTML = `
-            <p>Current Price: $${data.currentPrice}</p>
-            <p>High: $${data.high}</p>
-            <p>Low: $${data.low}</p>
-            <p>Open: $${data.open}</p>
-            <p>Close: $${data.close}</p>
+            <p>Symbol: ${data.symbol}</p>
+            <p>Exchange: ${data.exchange}</p>
+            <p>Type: ${data.type}</p>
+            <p>Current Price: $${data.price}</p>
+            <p>Day Low: $${data.day_low}</p>
+            <p>Day High: $${data.day_high}</p>
+            <p>Year Low: $${data.year_low}</p>
+            <p>Year High: $${data.year_high}</p>
+            <p>Currency: ${data.currency}</p>
             <p>Volume: ${data.volume}</p>
+            <p>Previous Close: $${data.previous_close}</p>
+            <p>Change: $${data.change}</p>
+            <p>Change Percent: ${(data.change_percent * 100).toFixed(2)}%</p>
         `;
     }
+
+    function updateStockChart(data) {
+        const labels = data.time_series.map(item => moment(item.datetime, "YYYY-MM-DD HH:mm:ss"));
+        const prices = data.time_series.map(item => item.close);
+      
+        const ctx = document.getElementById('stock-chart').getContext('2d');
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: `${data.symbol} Stock Price`,
+              data: prices,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              fill: true,
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'time',
+                time: {
+                  unit: 'minute',
+                  displayFormats: {
+                    minute: 'HH:mm'
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      
 
     // Local Storage for Favorites
     function addFavorite(symbol) {
