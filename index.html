@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Financial Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" id="home-link">Home</a></li>
+                    <li><a href="#" id="comparison-link">Comparison</a></li>
+                    <li><a href="#" id="alerts-link">Alerts</a></li>
+                    <li><a href="#" id="favorites-link">Favorites</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="home-section">
+                <h2>Real-Time Stock Data</h2>
+                <div id="stock-data"></div>
+            </section>
+            <section id="comparison-section" style="display: none;">
+                <h2>Stock Comparison</h2>
+                <div id="comparison-data"></div>
+            </section>
+            <section id="alerts-section" style="display: none;">
+                <h2>Price Alerts</h2>
+                <div id="alerts-data"></div>
+            </section>
+            <section id="favorites-section" style="display: none;">
+                <h2>Favorites</h2>
+                <div id="favorites-data"></div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
