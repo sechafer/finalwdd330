@@ -134,3 +134,90 @@ body {
 #welcomeMessage {
     margin-bottom: 20px;
 }
+
+#comparisonTable {
+    background-color: #e3f2fd; /* Light blue background */
+}
+
+#comparisonTable th {
+    text-align: center;
+    background-color: #1976d2; /* Darker blue */
+    color: white;
+}
+
+#comparisonTable td {
+    text-align: center;
+}
+
+#comparisonTable tbody tr:nth-child(odd) {
+    background-color: #f1f8e9; /* Light green for odd rows */
+}
+
+#comparisonTable tbody tr:nth-child(even) {
+    background-color: #f9fbe7; /* Light yellow for even rows */
+}
+
+#comparisonTable tbody tr:hover {
+    background-color: #dce775; /* Light green when hovered */
+}
+
+/* Estilo para las imágenes de los libros */
+img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.1); /* Agrandar la imagen */
+    filter: brightness(1.2); /* Aclarar la imagen */
+}
+
+/* Navbar styles */
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-fixed.transparent {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Footer styles */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+}
+
+footer h5 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .text-center {
+    margin-top: 20px;
+}

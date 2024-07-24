@@ -35,4 +35,25 @@ $.ajax(settings).done(function (response) {
       `;
       newsContainer.append(newsHTML);
   });
+
+    // Navbar transparency effect
+    let idleTimer;
+    const idleTime = 5000; // 5 seconds
+
+    const resetIdleTimer = () => {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            $('.navbar-fixed').addClass('transparent');
+        }, idleTime);
+    };
+
+    $(document).on('mousemove keypress scroll', resetIdleTimer);
+
+    $(window).on('scroll', () => {
+        $('.navbar-fixed').removeClass('transparent');
+        resetIdleTimer();
+    });
+
+    // Initial call to reset the idle timer
+    resetIdleTimer();
 });
